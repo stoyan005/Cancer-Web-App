@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Your Cancer Risk Result</title>
+		<link rel="stylesheet" href="/result.css" />
+	</head>
+	<body>
+		<header>
+			<h1>Your Cancer Risk Result</h1>
+			<nav>
+				<a href="/">Home</a>
+				<a href="/risk">Take Test Again</a>
+			</nav>
+		</header>
+
+		<section class="result-container">
+			<h2 id="risk"></h2>
+			<p id="advice"></p>
+		</section>
+
+		<script>
+			// Get risk data from query params (or you could use server-side templating)
+			const params = new URLSearchParams(window.location.search);
+			document.getElementById('risk').textContent = params.get('risk') || 'No data';
+			document.getElementById('advice').textContent = params.get('advice') || '';
+		</script>
+	</body>
+</html>

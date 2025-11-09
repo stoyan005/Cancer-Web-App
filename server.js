@@ -20,6 +20,10 @@ app.get('/risk', (req, res) => {
 	res.sendFile(path.join(__dirname, 'views', 'risk.html'));
 });
 
+app.get('/result', (req, res) => {
+	res.sendFile(path.join(__dirname, 'views', 'result.html'));
+});
+
 app.post('/result', (req, res) => {
 	const { age, smoker, family_history, diet } = req.body;
 
@@ -38,24 +42,10 @@ app.post('/result', (req, res) => {
 		advice = 'Consider lifestyle changes and regular checkups.';
 	} else {
 		risk = 'Low Risk';
-		advice = 'Main a healthy lifestyle and diet.';
+		advice = 'Maintain a healthy lifestyle and diet.';
 	}
 
-	res.send(`
-    <html>
-    <head>
-        <title>Your Cancer Risk Evaluation</title>
-        <link rel="stylesheet" href="/style.css">
-    </head>
-    <body>
-        <h2>Your Cancer Risk Result</h2>
-        <h3>${risk}</h3>
-        <p>${advice}</p>
-        <a href="/risk">Take Test Again</a>
-        <a href="/">Back Home</a>
-    </body>
-    </html>
-    `);
+	res.redirect(`/result?risk=${encodeURIComponent(risk)}&advice=${encodeURIComponent(advice)}`);
 });
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
