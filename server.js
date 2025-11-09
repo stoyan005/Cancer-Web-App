@@ -5,11 +5,11 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-app.use(bodyParser.urlenconded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, 'views', 'info.html'));
+	res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
 app.get('/info', (req, res) => {
@@ -17,7 +17,7 @@ app.get('/info', (req, res) => {
 });
 
 app.get('/risk', (req, res) => {
-	res.sendFile(path.join(__dirname, 'views', 'info.html'));
+	res.sendFile(path.join(__dirname, 'views', 'risk.html'));
 });
 
 app.post('/result', (req, res) => {
@@ -50,7 +50,7 @@ app.post('/result', (req, res) => {
     <body>
         <h2>Your Cancer Risk Result</h2>
         <h3>${risk}</h3>
-        <p>${adivce}</p>
+        <p>${advice}</p>
         <a href="/risk">Take Test Again</a>
         <a href="/">Back Home</a>
     </body>
@@ -58,4 +58,4 @@ app.post('/result', (req, res) => {
     `);
 });
 
-app.listen(PORT, () => console.log(`Server running on https://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
